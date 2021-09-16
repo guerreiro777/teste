@@ -1,0 +1,41 @@
+prova:
+  hello: "hello quarkus"
+
+quarkus:
+  log:
+    console:
+      format: "%d{HH:mm:ss} %-5p [%c{2.}] (%t) %X{requestID} %s%e%n"
+  datasource:
+    metrics:
+      enabled: true
+  swagger-ui:
+    enable: true
+  tls:
+    trust-all: true
+  jaeger:
+    service-name: myservice
+    sampler-type: const
+    sampler-param: 1
+
+br:
+  com:
+    bb:
+      prova:
+        integration:
+          CotacaoDolar/mp-rest/url: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao
+          CotacaoDolar/mp-rest/scope: javax.inject.Singleton
+
+"%dev":
+  quarkus:
+    datasource:
+      username: postgres
+      password: postgres
+      jdbc:
+        url: jdbc:postgresql://127.0.0.1:5432/cotacao
+      db-kind: postgresql
+    hibernate-orm:
+      log:
+        sql: true
+#      sql-load-script: import.sql
+      database:
+        generation: drop-and-create
